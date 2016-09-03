@@ -1,0 +1,8 @@
+haxegonweb/bin
+haxegonweb/bin/*
+haxegonweb/bin.build
+haxegonweb/project.xml
+*.gz
+.htaccess
+bin/
+*.swp
