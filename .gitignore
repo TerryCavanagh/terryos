@@ -3,6 +3,7 @@ haxegonweb/bin/*
 haxegonweb/bin.build
 haxegonweb/project.xml
 *.gz
+*.mobileprovision
 .htaccess
 bin/
 *.swp
