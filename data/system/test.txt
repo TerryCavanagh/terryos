@@ -1,0 +1,46 @@
+//__TERRYOSSCRIPT__
+//__ICON__üåcHeCzRBh2üWad2am2aWadjämLqZvdjxmLeYutnäm2aWad2ap2üG
+
+var col = 0;
+var del = 0;
+
+var x = 0;
+var y = 0;
+var xdir = 1;
+var ydir = 1;
+var radius = 20;
+var ballspeed = 2;
+
+function update(){
+  fillbox(0, 0, screenwidth, screenheight, col);
+  del--;
+  if(del <= 0){
+    del=10;
+    col = (col + 1)%16;
+  }
+  
+  x += xdir * ballspeed;
+  y += ydir * ballspeed;
+  
+  if(x < radius) {
+    x = radius;
+    xdir = 1;
+  }
+  
+  if(y < radius) {
+    y = radius;
+    ydir = 1;
+  }
+  
+  if(x > screenwidth - radius) {
+    x = screenwidth - radius;
+    xdir = -1;
+  }
+  
+  if(y > screenheight - radius) {
+    y = screenheight - radius;
+    ydir = -1;
+  }
+  
+  fillcircle(x, y, radius, (col + 8) % 16);
+}

@@ -94,6 +94,7 @@ class Script {
 		//Library functions
 		interpreter.variables.set("fillbox", TerryOSGfx.fillbox);
 		interpreter.variables.set("fillcircle", TerryOSGfx.fillcircle);
+		interpreter.variables.set("print", TerryOSText.display);
 		interpreter.variables.set("screenwidth", Gfx.screenwidth);
 		interpreter.variables.set("screenheight", Gfx.screenheight);
 	}

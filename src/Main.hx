@@ -5,9 +5,22 @@ class Main {
 		Script.init();
 		
 		Script.runapp("test");
+		
+		Network.loadurl("https://api.github.com/repos/TerryCavanagh/terryos/contents/appstore/");
 	}
 	
+	var webcontents:String;
 	function update() {
 		Script.update();
+		
+		if(Network.responseready()){
+			webcontents = Network.getresponse();
+		}
+		
+		if(webcontents != null){
+			Text.wordwrap(Gfx.screenwidth);
+			Text.display(0, 0, webcontents, Col.WHITE);
+			Text.wordwrap();
+		}
 	}
 }

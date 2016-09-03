@@ -38,6 +38,8 @@
 	<haxelib name="openfl" />
 	<haxelib name="hscript" />
 	<haxedef name="hscriptPos" />
+	<haxelib name="akifox-asynchttp" />
+  <haxelib name="hxssl" />
 	
 	<assets path="data/music/mp3" rename="data/music" exclude="*.txt" if="flash"/> 
 	<assets path="data/music/ogg" rename="data/music" exclude="*.txt" unless="flash"/> 
