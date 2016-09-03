@@ -10,7 +10,7 @@ class Main {
 		
 		onhomescreen = true;
 		//System apps get added first
-		var a:Appclass = new Appclass("Update", "system");
+		var a:Appclass = new Appclass("Update", "system_update");
 		a.icon = ""; a.filehash = "";	a.contents = "";
 		installedapps.push(a);
 		
@@ -45,7 +45,11 @@ class Main {
 	
 	function startapp(a:Appclass) {
 		onhomescreen = false;
-		Script.runapp(a.filename);
+		if (a.filename == "system_update") {
+			onhomescreen = true;
+		}else {
+		  Script.runapp(a.filename);
+		}
 		fadein();
 	}
 	
@@ -90,31 +94,31 @@ class Main {
 	function updatefade() {
 		if (fademode != "") {
 		  if (fademode == "fadeout") {
-			  fadevalue+=2;
-				if (fadevalue >= 10) {
-					fadevalue = 10;
-				  fademode == "faded";
-					if (fadeaction != "") {
-						if (fadeaction == "openapp") {
-						  startapp(apptoopen);	
-						}
-					  fadeaction = "";	
-					}
+			  fadevalue += 2;
+				if (fadevalue >= 14) {
+					fadevalue = 14;
+				  fademode = "faded";
 				}
 				Gfx.fillbox(0, 0, Gfx.screenwidth, (Gfx.screenheightmid * fadevalue) / 10, TerryOSGfx.colours[0]);
 				Gfx.fillbox(0, Gfx.screenheight - (Gfx.screenheightmid * fadevalue) / 10, Gfx.screenwidth, (Gfx.screenheightmid * fadevalue) / 10, TerryOSGfx.colours[0]);
 			}
 			if (fademode == "fadein") {
-			  fadevalue-=2;
+			  fadevalue -= 2;
 				if (fadevalue <= 0) {
 					fadevalue = 0;
-				  fademode == "";	
+				  fademode = "";	
 				}
 				Gfx.fillbox(0, 0, Gfx.screenwidth, (Gfx.screenheightmid * fadevalue) / 10, TerryOSGfx.colours[0]);
 				Gfx.fillbox(0, Gfx.screenheight - (Gfx.screenheightmid * fadevalue) / 10, Gfx.screenwidth, (Gfx.screenheightmid * fadevalue) / 10, TerryOSGfx.colours[0]);
 			}
 			if (fademode == "faded") {
 				Gfx.clearscreen(TerryOSGfx.colours[0]);
+				if (fadeaction != "") {
+					if (fadeaction == "openapp") {
+						startapp(apptoopen);	
+					}
+					fadeaction = "";	
+				}
 			}
 		}	
 	}
@@ -122,8 +126,10 @@ class Main {
 	function drawhomescreen() {
 		Gfx.clearscreen(TerryOSGfx.colours[0]);
 		for (j in 0 ... Gfx.screenheight) {
-			if(j % 4 == 0){
-				Gfx.fillbox(0, j, Gfx.screenwidth, 1, TerryOSGfx.colours[1]);	
+			for (i in 0 ... Gfx.screenwidth) {
+				if(j % 8 == 1 && i % 8 == 1){
+					Gfx.fillbox(i, j, 2, 2, TerryOSGfx.colours[1]);	
+				}
 			}
 		}
 		
