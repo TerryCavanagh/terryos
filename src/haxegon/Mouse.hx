@@ -6,8 +6,22 @@ import openfl.ui.Mouse;
 import openfl.events.Event;
 import openfl.net.*;
 import openfl.Lib;
+
+import openfl.events.TouchEvent;
+import openfl.ui.Multitouch;
+import openfl.ui.MultitouchInputMode;
 	
 class Mouse{		
+	public static var touchx:Array<Int> = [];
+	public static var touchy:Array<Int> = [];
+	public static var touchid:Array<Int> = [];
+	public static var temptouchid:Int = 0;
+	
+	public static var click:Bool = false;
+	public static var clickheld:Bool = false;
+	public static var hasclicked:Bool = false;
+	public static var press:Bool = false;
+	
 	public static var x:Int;
 	public static var y:Int;
 	public static var oldx:Int;
@@ -38,6 +52,12 @@ class Mouse{
 		stage.addEventListener(MouseEvent.RIGHT_MOUSE_UP, handleRightMouseUp );
 		#end
 		
+		Multitouch.inputMode = MultitouchInputMode.TOUCH_POINT;
+		
+		stage.addEventListener(TouchEvent.TOUCH_BEGIN, touchbeginlistener);
+		stage.addEventListener(TouchEvent.TOUCH_MOVE, touchmovelistener);
+		stage.addEventListener(TouchEvent.TOUCH_END, touchendlistener);
+		/*
 		stage.addEventListener(MouseEvent.MOUSE_DOWN, handleMouseDown);
 		stage.addEventListener(MouseEvent.MOUSE_UP, handleMouseUp);
 		stage.addEventListener(MouseEvent.MIDDLE_MOUSE_DOWN, handleMiddleMouseDown);
@@ -46,6 +66,7 @@ class Mouse{
 		stage.addEventListener(MouseEvent.MOUSE_MOVE, mouseOver);
 		stage.addEventListener(Event.MOUSE_LEAVE, mouseLeave);
 		stage.addEventListener(Event.DEACTIVATE, handleDeactivate);
+		*/
 		x = 0;
 		y = 0;
 		oldx = 0;
@@ -59,6 +80,123 @@ class Mouse{
 		_last = 0;
 	}
 	
+	public static function gettouchx():Int {
+		if (touchx.length == 0) {
+			return touchx[0];
+		}else {
+			return touchx[touchx.length - 1];
+		}
+	}
+		
+	public static function gettouchy():Int {
+		if (touchy.length == 0) {
+			return touchy[0];
+		}else {
+			return touchy[touchy.length - 1];
+		}
+	}
+	
+	public static function touchbeginlistener(e:TouchEvent){
+		touchx.push(Std.int(e.stageX));
+		touchy.push(Std.int(e.stageY));
+		touchid.push(e.touchPointID);
+		
+		/*
+		if (controlstick == -1) {
+			//Consider this for the controlstick point
+			if (touchx[touchPoints] < controlstick_xrange) {
+				if (touchy[touchPoints] > controlstick_yrange) {
+					controlstick = touchid[touchPoints];
+					controlstick_x = touchx[touchPoints];
+					controlstick_y = touchy[touchPoints];
+					pushleft = false;
+					pushright = false;
+					firstmove = true;
+				}
+			}
+		}*/
+		
+		press = true;
+		click = true;
+		clickheld = true;
+		hasclicked = true;
+	}
+	
+	public static function touchendlistener(e:TouchEvent) {
+		//Identify the point that's been removed, and take it away from the array
+		temptouchid = e.touchPointID;
+		
+		/*
+		if (temptouchid == controlstick) {
+			controlstick = -1;
+			pushleft = false;
+			pushright = false;
+			firstmove = false;
+			controlstick_x = -1;
+			controlstick_y = -1;
+		}*/
+		
+		for (i in 0 ... touchid.length) {
+			if (touchid[i] == temptouchid) {
+				for (j in i ... touchid.length) {
+					touchx[j] = touchx[j + 1];
+					touchy[j] = touchy[j + 1];
+					touchid[j] = touchid[j + 1];
+				}
+				touchx.pop(); touchy.pop(); touchid.pop();
+				break;
+			}
+		}
+		
+		if (touchid.length == 0){
+			press = false;
+			click = false;
+			clickheld = false;
+			hasclicked = false;
+		}
+	}
+	
+	public static function touchmovelistener(e:TouchEvent) { 
+		//Identify the touch point that's moving, and update it's coordinates
+		temptouchid = e.touchPointID;
+		for (i in 0 ... touchid.length) {
+			if (touchid[i] == temptouchid) {
+				touchx[i] = Std.int(e.stageX);
+				touchy[i] = Std.int(e.stageY);
+				/*
+				if (touchid[i] == controlstick) {
+					if (firstmove) {
+						if (touchx[i] < controlstick_x) {
+							pushleft = true; pushright = false;
+							firstmove = false;
+							controlstick_x = touchx[i] + deadzone;
+							controlstick_y = touchy[i];
+						}else if (touchx[i] > controlstick_x) {
+							pushleft = false; pushright = true;
+							firstmove = false;
+							controlstick_x = touchx[i] - deadzone;
+							controlstick_y = touchy[i];
+						}
+					}else{
+						if (touchx[i] < controlstick_x - deadzone) {
+							pushleft = true; pushright = false;
+							controlstick_x = touchx[i] + deadzone;
+							controlstick_y = touchy[i];
+						}else if (touchx[i] > controlstick_x + deadzone) {
+							pushleft = false; pushright = true;
+							controlstick_x = touchx[i] - deadzone;
+							controlstick_y = touchy[i];
+						}else if (touchx[i] >= controlstick_x - deadzone_inner &&
+											touchx[i] <= controlstick_x + deadzone_inner) {
+							pushleft = false; pushright = false;
+						}
+					}
+				}
+				*/
+			}
+		}			
+	} 
+
 	private static function unload(stage:DisplayObject) {
 		//Right mouse stuff
 		#if !flash

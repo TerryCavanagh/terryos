@@ -7,12 +7,8 @@ class Main {
 	function new() {
 		Script.init();
 		
-		//For testing
+		//System apps get added first
 		var a:Appclass = new Appclass("Update", "system");
-		a.icon = ""; a.filehash = "";	a.contents = "";
-		installedapps.push(a);
-		
-		a = new Appclass("AAAA", "system");
 		a.icon = ""; a.filehash = "";	a.contents = "";
 		installedapps.push(a);
 		
@@ -69,6 +65,10 @@ class Main {
 				}
 				homei++;
 			}
+		}
+		
+		for (i in 0 ... Mouse.touchid.length) {
+		  Text.display(0, i * 12, Mouse.touchid[i] + ": " + Mouse.touchx[i] + ", " + Mouse.touchy);	
 		}
 	}
 }
