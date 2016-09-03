@@ -97,8 +97,8 @@ class Mouse{
 	}
 	
 	public static function touchbeginlistener(e:TouchEvent){
-		touchx.push(Std.int(e.stageX));
-		touchy.push(Std.int(e.stageY));
+		touchx.push(Std.int(e.stageX / 2));
+		touchy.push(Std.int(e.stageY / 2));
 		touchid.push(e.touchPointID);
 		
 		/*
@@ -161,8 +161,8 @@ class Mouse{
 		temptouchid = e.touchPointID;
 		for (i in 0 ... touchid.length) {
 			if (touchid[i] == temptouchid) {
-				touchx[i] = Std.int(e.stageX);
-				touchy[i] = Std.int(e.stageY);
+				touchx[i] = Std.int(e.stageX / 2);
+				touchy[i] = Std.int(e.stageY / 2);
 				/*
 				if (touchid[i] == controlstick) {
 					if (firstmove) {
