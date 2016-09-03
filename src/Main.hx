@@ -6,7 +6,7 @@ class Main {
 		
 		Script.runapp("test");
 		
-		Network.loadurl("https://api.github.com/repositories/67296170/contents/appstore");
+		Network.loaddir("https://api.github.com/repositories/67296170/contents/appstore");
 	}
 	
 	var webcontents:String;

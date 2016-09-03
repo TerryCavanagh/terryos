@@ -2,6 +2,7 @@ import haxegon.*;
 
 import openfl.net.*;
 import openfl.events.*;
+import haxe.Json;
 
 class Network{
 	public static function loadurl(_url:String) {
@@ -12,45 +13,32 @@ class Network{
 		
 		var loader:URLLoader = new URLLoader(req);
 		loader.addEventListener(Event.COMPLETE, onComplete);
-		
-		/*
-		var req:Http = new Http(_url);
-		req.setHeader('User-Agent', "Mozilla/5.0 (Windows NT 10.0; WOW64; rv:48.0) Gecko/20100101 Firefox/48.0");
-		req.setHeader('Connection', 'close');
-		#if (neko||php||cpp||cs||java)
-			req.cnxTimeout=10;
-		#end
-		req.onData = function (data)
-      Debug.log('first 100 bytes: ' + data.substr(0, 100));
-		req.onStatus = function (status) Debug.log('STATUS: $status');
-   	req.onError = function (error)
-      Debug.log('error: $error');
-			
-    req.request(false);
-		*/
-		/*
-		var request = new HttpRequest({
-		  url : _url,
-		  callback : function(_response:HttpResponse):Void {
-			  if (_response.isOK) {
-					responsestate	= NetworkResponse.finished;
-					response = _response.content;
-					responseisbinary = _response.isBinary;
-					//Debug.log('DONE ${response.status}');
-				} else {
-					responsestate	= NetworkResponse.failed;
-					response = _response.error;
-					//response = 'ERROR ${response.status} ${response.error}';
-				}
-			}  
-		});
-		
-		request.send();
-		*/
 	}
 	
-	public static function onComplete(e:Event) {
-		response = e.target.data;
+	public static function loaddir(_url:String) {
+	  responsestate	= NetworkResponse.dailing;
+		
+		var req:URLRequest = new URLRequest(_url);
+		req.method = URLRequestMethod.GET;
+		
+		var loader:URLLoader = new URLLoader(req);
+		loader.addEventListener(Event.COMPLETE, onCompleteDirload);
+	}
+	
+	public static function onCompleteDirload(e:Event) {
+		jsonfile = Json.parse(e.target.data);
+		
+		filelist = [];
+		fileurl = [];
+		filesha = []
+		for (i in 0 ... jsonfile.length) {
+		  filelist.push(jsonfile[i].name);
+			fileurl.push(jsonfile[i].html_url);
+			filesha.push(jsonfile[i].sha);
+		}
+		
+		response = filelist.toString();
+		//response = e.target.data;
 		responsestate = NetworkResponse.finished;
 	}
 	
@@ -69,4 +57,9 @@ class Network{
 	public static var responsestate:NetworkResponse;
 	public static var response:String;
 	public static var responseisbinary:Bool;
+	
+	public static var jsonfile:Dynamic;
+	public static var filelist:Array<String>;
+	public static var fileurl:Array<String>;
+	public static var filesha:Array<String>;
 }

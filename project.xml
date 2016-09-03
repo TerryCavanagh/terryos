@@ -19,7 +19,7 @@
    ></window>
    
 	<window
-      fps="60"
+      fps="30"
       background="0x000000"
       orientation="portrait"
       hardware="true"
@@ -38,7 +38,6 @@
 	<haxelib name="openfl" />
 	<haxelib name="hscript" />
 	<haxedef name="hscriptPos" />
-  <haxelib name="hxssl" />
 	
 	<assets path="data/music/mp3" rename="data/music" exclude="*.txt" if="flash"/> 
 	<assets path="data/music/ogg" rename="data/music" exclude="*.txt" unless="flash"/> 
