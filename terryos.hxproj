@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<project version="2">
+  <!-- Output SWF options -->
+  <output>
+    <movie outputType="CustomBuild" />
+    <movie input="" />
+    <movie path="project.xml" />
+    <movie fps="60" />
+    <movie width="320" />
+    <movie height="568" />
+    <movie version="1" />
+    <movie minorVersion="0" />
+    <movie platform="Lime" />
+    <movie background="000000" />
+  </output>
+  <!-- Other classes to be compiled into your SWF -->
+  <classpaths>
+    <class path="C:\coding\haxe\Haxe\lib\openfl\4,1,0" />
+    <class path="C:\coding\haxe\Haxe\lib\lime\3,1,0" />
+    <class path="C:\coding\haxe\Haxe\lib\hscript\2,0,7" />
+    <class path="src" />
+    <class path="C:\coding\haxe\Haxe\lib\openfl\4,1,0\externs\core\flash" />
+    <class path="C:\coding\haxe\Haxe\lib\openfl\4,1,0\externs\core\openfl" />
+    <class path="C:\coding\haxe\Haxe\lib\openfl\4,1,0\externs\extras" />
+    <class path="bin\flash\debug\haxe" />
+  </classpaths>
+  <!-- Build options -->
+  <build>
+    <option directives="openfl=4.1.0&#xA;lime=3.1.0&#xA;hscript=2.0.7&#xA;hscriptPos&#xA;tools=3.1.0&#xA;no-compilation&#xA;openfl-flash&#xA;web&#xA;display" />
+    <option flashStrict="False" />
+    <option noInlineOnDebug="False" />
+    <option mainClass="ApplicationMain" />
+    <option enabledebug="False" />
+    <option additional="#--macro keep('IntIterator')&#xA;#--macro keep('IntIterator')&#xA;-swf-version 11.9&#xA;-debug " />
+  </build>
+  <!-- haxelib libraries -->
+  <haxelib>
+    <!-- example: <library name="..." /> -->
+  </haxelib>
+  <!-- Class files to compile (other referenced classes will automatically be included) -->
+  <compileTargets>
+    <!-- example: <compile path="..." /> -->
+  </compileTargets>
+  <!-- Paths to exclude from the Project Explorer tree -->
+  <hiddenPaths>
+    <hidden path="obj" />
+  </hiddenPaths>
+  <!-- Executed before build -->
+  <preBuildCommand>"$(CompilerPath)/haxelib" run lime build "$(OutputFile)" $(TargetBuild) -$(BuildConfig) -Dfdb</preBuildCommand>
+  <!-- Executed after build -->
+  <postBuildCommand alwaysRun="False" />
+  <!-- Other project options -->
+  <options>
+    <option showHiddenPaths="False" />
+    <option testMovie="Custom" />
+    <option testMovieCommand="" />
+  </options>
+  <!-- Plugin storage -->
+  <storage />
+</project>
