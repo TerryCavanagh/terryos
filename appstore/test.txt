@@ -1,5 +1,4 @@
 //__TERRYOSSCRIPT__
-//__ICON__üåcHeCzRBh2üWad2am2aWadjämLqZvdjxmLeYutnäm2aWad2ap2üG
 
 function update(){
   print(0, 0, "Success!", 1);
