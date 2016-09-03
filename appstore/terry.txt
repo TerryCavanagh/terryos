@@ -14,8 +14,8 @@ function update(){
   fillbox(0, 0, screenwidth, screenheight, col);
   del--;
   if(del <= 0){
-    del=10;
-    col = (col + 1)%16;
+    del = 30;
+    col = (col + 1) % 4;
   }
   
   x += xdir * ballspeed;
@@ -41,5 +41,5 @@ function update(){
     ydir = -1;
   }
   
-  fillcircle(x, y, radius, (col + 8) % 16);
+  fillcircle(x, y, radius, (col + 2) % 4);
 }
