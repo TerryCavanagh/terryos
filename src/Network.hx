@@ -5,16 +5,6 @@ import openfl.events.*;
 import haxe.Json;
 
 class Network{
-	public static function loadurl(_url:String) {
-	  responsestate	= NetworkResponse.dailing;
-		
-		var req:URLRequest = new URLRequest(_url);
-		req.method = URLRequestMethod.GET;
-		
-		var loader:URLLoader = new URLLoader(req);
-		loader.addEventListener(Event.COMPLETE, onComplete);
-	}
-	
 	public static function loaddir(_url:String) {
 	  responsestate	= NetworkResponse.dailing;
 		
@@ -25,15 +15,33 @@ class Network{
 		loader.addEventListener(Event.COMPLETE, onCompleteDirload);
 	}
 	
+	public static function loadfile(_url:String) {
+	  responsestate	= NetworkResponse.dailing;
+		
+		var req:URLRequest = new URLRequest(_url);
+		req.method = URLRequestMethod.GET;
+		
+		var loader:URLLoader = new URLLoader(req);
+		loader.addEventListener(Event.COMPLETE, onCompleteFileload);
+	}
+	
+	public static function onCompleteFileload(e:Event) {
+	  responsestate	= NetworkResponse.finished;
+		trace(e.target.data);
+		var filecontents:String = e.target.data;
+		
+		response = filecontents;
+	}
+	
 	public static function onCompleteDirload(e:Event) {
 		jsonfile = Json.parse(e.target.data);
 		
 		filelist = [];
 		fileurl = [];
-		filesha = []
+		filesha = [];
 		for (i in 0 ... jsonfile.length) {
 		  filelist.push(jsonfile[i].name);
-			fileurl.push(jsonfile[i].html_url);
+			fileurl.push(jsonfile[i].download_url);
 			filesha.push(jsonfile[i].sha);
 		}
 		
@@ -54,7 +62,7 @@ class Network{
 	  return response;
 	}
 	
-	public static var responsestate:NetworkResponse;
+	public static var responsestate:NetworkResponse = NetworkResponse.ready;
 	public static var response:String;
 	public static var responseisbinary:Bool;
 	
