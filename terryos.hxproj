@@ -18,7 +18,6 @@
     <class path="C:\coding\haxe\Haxe\lib\openfl\4,1,0" />
     <class path="C:\coding\haxe\Haxe\lib\lime\3,1,0" />
     <class path="C:\coding\haxe\Haxe\lib\hscript\2,0,7" />
-    <class path="C:\coding\haxe\Haxe\lib\akifox-asynchttp\0,4,3" />
     <class path="C:\coding\haxe\Haxe\lib\hxssl\3,0,0-alpha" />
     <class path="src" />
     <class path="C:\coding\haxe\Haxe\lib\openfl\4,1,0\externs\core\openfl" />
@@ -27,7 +26,7 @@
   </classpaths>
   <!-- Build options -->
   <build>
-    <option directives="openfl=4.1.0&#xA;lime=3.1.0&#xA;hscript=2.0.7&#xA;akifox-asynchttp=0.4.3&#xA;hxssl=3.0.0-alpha&#xA;hscriptPos&#xA;tools=3.1.0&#xA;no-compilation&#xA;native&#xA;lime-native&#xA;openfl-native&#xA;windows&#xA;desktop&#xA;display" />
+    <option directives="openfl=4.1.0&#xA;lime=3.1.0&#xA;hscript=2.0.7&#xA;hxssl=3.0.0-alpha&#xA;hscriptPos&#xA;tools=3.1.0&#xA;no-compilation&#xA;native&#xA;lime-native&#xA;openfl-native&#xA;windows&#xA;desktop&#xA;display" />
     <option flashStrict="False" />
     <option noInlineOnDebug="False" />
     <option mainClass="ApplicationMain" />
