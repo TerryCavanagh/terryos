@@ -27,7 +27,6 @@ class Network{
 	
 	public static function onCompleteFileload(e:Event) {
 	  responsestate	= NetworkResponse.finished;
-		trace(e.target.data);
 		var filecontents:String = e.target.data;
 		
 		response = filecontents;

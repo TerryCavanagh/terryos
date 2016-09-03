@@ -47,6 +47,11 @@ class Script {
 		return beginparsedscript();
 	}
 	
+	/* for testing only; save as a file and reload files when installing apps */
+	public static function addscriptbystring(filename:String, scriptstring:String) {
+		applist.set(filename, scriptstring);
+	}
+	
 	private static function beginparsedscript():Bool {
 		try {
 			interpreter.execute(parsedscript);

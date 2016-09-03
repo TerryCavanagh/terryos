@@ -2,26 +2,11 @@ import haxegon.*;
 
 class TerryOSGfx {
 	public static var colours:Array<Int> = [
-	  Col.BLACK, 
-		Col.GREY,
-		Col.WHITE, 
-		Col.RED, 
-		Col.PINK, 
-		Col.DARKBROWN, 
-		Col.BROWN, 
-		Col.ORANGE,
-		Col.YELLOW,
-		Col.DARKGREEN,
-		Col.GREEN,
-		Col.LIGHTGREEN,
-		Col.NIGHTBLUE, 
-		Col.DARKBLUE,
-		Col.BLUE,
-		Col.LIGHTBLUE
+	  0x110304, 0x450306, 0x8f2d2d, 0xf19599
   ];
 	
 	public static inline function fixcol(colour:Int):Int {
-		if (colour < 0 || colour >=16) return Col.TRANSPARENT;
+		if (colour < 0 || colour >= 4) return Col.TRANSPARENT;
 		return colours[colour];
 	}
 	
