@@ -21,7 +21,7 @@
 	<window
       fps="60"
       background="0x000000"
-      orientation="landscape"
+      orientation="portrait"
       hardware="true"
       vsync="true"
    ></window>

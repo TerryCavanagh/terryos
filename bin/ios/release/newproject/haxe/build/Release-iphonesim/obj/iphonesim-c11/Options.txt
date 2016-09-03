@@ -1,2 +1,0 @@
-hxcpp_api_level=321
-hxcpp=/Users/terry/coding/haxe/hxcpp/3,3,49/
